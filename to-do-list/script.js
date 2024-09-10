@@ -6,63 +6,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Event listener for the "Add Task" button
 document.getElementById('addTaskButton').addEventListener('click', function(event) {
-    event.preventDefault();  // Prevent default button behavior
-
+    event.preventDefault(); 
     const taskInput = document.getElementById('taskInput');
-    const taskValue = taskInput.value.trim();  // Get the value of the input
+    const taskValue = taskInput.value.trim();  
     if (taskValue === '') {
         alert("Please enter a task.");
         return;
     }
-
-    // Add the task to the list and save it to localStorage
     addTaskToList(taskValue, false);
     saveTask(taskValue, false);
-
-    // Clear the input field after adding the task
     taskInput.value = '';
 });
 
 // Function to add a task to the task list in the UI
 function addTaskToList(taskText, isCompleted) {
     const taskList = document.getElementById('taskList');
-
-    // Create a list item
     const li = document.createElement('li');
-
-    // Create checkbox for marking task as complete
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.checked = isCompleted;  // Set checkbox based on task completion status
+    checkbox.checked = isCompleted; 
 
     // Create task text
     const taskSpan = document.createElement('span');
     taskSpan.textContent = taskText;
 
     if (isCompleted) {
-        taskSpan.classList.add('completed');  // Add strikethrough to text if completed
+        taskSpan.classList.add('completed');  
     }
 
     checkbox.onclick = function() {
-        taskSpan.classList.toggle('completed');  // Toggle strikethrough on text
-        updateTask(taskText, checkbox.checked);  // Update task completion status in localStorage
-    };
-
-    // Create a div to wrap the edit and delete buttons
-    const buttonDiv = document.createElement('div');
-    buttonDiv.classList.add('button-container'); // Add class for styling
-
-    // Add a button to edit the task
-    const editButton = document.createElement('button');
-    editButton.textContent = "Edit";
-    editButton.classList.add('edit-btn');  // Add class for styling
-    editButton.onclick = function() {
-        const newTaskText = prompt("Edit task:", taskText);
-        if (newTaskText) {
-            taskSpan.textContent = newTaskText;
-            updateTaskText(taskText, newTaskText);  // Update the task text in localStorage
-            taskText = newTaskText;  // Update the local variable
-        }
+        taskSpan.classList.toggle('completed');
+        updateTask(taskText, checkbox.checked);  
     };
 
     // Add a button to delete the task
@@ -73,16 +47,10 @@ function addTaskToList(taskText, isCompleted) {
         deleteTask(taskText);
     };
 
-    // Append edit and delete buttons to the button div
-    buttonDiv.appendChild(editButton);
-    buttonDiv.appendChild(deleteButton);
-
-    // Append checkbox, task text, and the button div to the list item
+    // Append checkbox, task text, and delete button to the list item
     li.appendChild(checkbox);
     li.appendChild(taskSpan);
-    li.appendChild(buttonDiv);
-
-    // Add the list item to the task list
+    li.appendChild(deleteButton);
     taskList.appendChild(li);
 }
 
@@ -99,18 +67,6 @@ function updateTask(taskText, isCompleted) {
     tasks = tasks.map(task => {
         if (task.text === taskText) {
             task.completed = isCompleted;
-        }
-        return task;
-    });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-// Function to update the task text in localStorage
-function updateTaskText(oldText, newText) {
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks = tasks.map(task => {
-        if (task.text === oldText) {
-            task.text = newText;
         }
         return task;
     });
