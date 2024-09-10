@@ -1,12 +1,11 @@
-// Load tasks from localStorage when the page loads
+
 document.addEventListener('DOMContentLoaded', function() {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     storedTasks.forEach(task => addTaskToList(task.text, task.completed));
 });
-
-// Event listener for the "Add Task" button
 document.getElementById('addTaskButton').addEventListener('click', function(event) {
     event.preventDefault(); 
+
     const taskInput = document.getElementById('taskInput');
     const taskValue = taskInput.value.trim();  
     if (taskValue === '') {
@@ -17,16 +16,12 @@ document.getElementById('addTaskButton').addEventListener('click', function(even
     saveTask(taskValue, false);
     taskInput.value = '';
 });
-
-// Function to add a task to the task list in the UI
 function addTaskToList(taskText, isCompleted) {
     const taskList = document.getElementById('taskList');
     const li = document.createElement('li');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = isCompleted; 
-
-    // Create task text
     const taskSpan = document.createElement('span');
     taskSpan.textContent = taskText;
 
@@ -35,33 +30,40 @@ function addTaskToList(taskText, isCompleted) {
     }
 
     checkbox.onclick = function() {
-        taskSpan.classList.toggle('completed');
+        taskSpan.classList.toggle('completed');  
         updateTask(taskText, checkbox.checked);  
     };
-
-    // Add a button to delete the task
+    const buttonDiv = document.createElement('div');
+    buttonDiv.classList.add('button-container'); 
+    const editButton = document.createElement('button');
+    editButton.textContent = "Edit";
+    editButton.classList.add('edit-btn');
+    editButton.onclick = function() {
+        const newTaskText = prompt("Edit task:", taskText);
+        if (newTaskText) {
+            taskSpan.textContent = newTaskText;
+            updateTaskText(taskText, newTaskText);  
+            taskText = newTaskText; 
+        }
+    };
     const deleteButton = document.createElement('button');
     deleteButton.textContent = "Delete";
     deleteButton.onclick = function() {
         taskList.removeChild(li);
         deleteTask(taskText);
     };
-
-    // Append checkbox, task text, and delete button to the list item
+    buttonDiv.appendChild(editButton);
+    buttonDiv.appendChild(deleteButton);
     li.appendChild(checkbox);
     li.appendChild(taskSpan);
-    li.appendChild(deleteButton);
+    li.appendChild(buttonDiv);
     taskList.appendChild(li);
 }
-
-// Function to save a task in localStorage
 function saveTask(taskText, isCompleted) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.push({ text: taskText, completed: isCompleted });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
-// Function to update the task status in localStorage
 function updateTask(taskText, isCompleted) {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks = tasks.map(task => {
@@ -72,8 +74,16 @@ function updateTask(taskText, isCompleted) {
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
-// Function to delete a task from localStorage
+function updateTaskText(oldText, newText) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.map(task => {
+        if (task.text === oldText) {
+            task.text = newText;
+        }
+        return task;
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 function deleteTask(taskText) {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks = tasks.filter(task => task.text !== taskText);

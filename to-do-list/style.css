@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #6A82FB, #FC5C7D); /* Gradient background */
+    background: linear-gradient(135deg, #6A82FB, #FC5C7D); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    background-color: rgba(255, 255, 255, 0.9); 
     padding: 30px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -43,7 +43,7 @@ input[type="text"]::placeholder {
 
 button {
     padding: 12px 20px;
-    background-color: #ff6f61; /* Button color */
+    background-color: #ff6f61; 
     color: #fff;
     border: none;
     border-radius: 25px;
@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #ff4a40; /* Hover color */
+    background-color: #ff4a40; 
 }
 
 ul {
@@ -74,19 +74,17 @@ ul li {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for task text when completed */
 ul li span.completed {
     text-decoration: line-through;
     color: #aaa;
 }
 
-/* Button container for Edit and Delete buttons */
 .button-container {
     display: flex;
-    gap: 5px; /* Space between Edit and Delete buttons */
+    gap: 5px;
 }
 
-/* Style for the buttons */
+
 ul li button {
     background-color: #ff4a40;
     color: white;
@@ -101,16 +99,14 @@ ul li button:hover {
     background-color: #e60000;
 }
 
-/* Styling for the edit button specifically */
 ul li button.edit-btn {
-    background-color: #4CAF50;  /* Green color for edit button */
+    background-color: #4CAF50; 
 }
 
 ul li button.edit-btn:hover {
-    background-color: #45a049;  /* Darker green on hover */
+    background-color: #45a049;  
 }
 
-/* Checkbox styling */
 ul li input[type="checkbox"] {
     margin-right: 10px;
     transform: scale(1.3);
