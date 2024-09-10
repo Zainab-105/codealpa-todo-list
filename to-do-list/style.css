@@ -1,0 +1,117 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6A82FB, #FC5C7D); /* Gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #ff6f61; /* Button color */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #ff4a40; /* Hover color */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+ul li {
+    padding: 15px;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for task text when completed */
+ul li span.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+/* Button container for Edit and Delete buttons */
+.button-container {
+    display: flex;
+    gap: 5px; /* Space between Edit and Delete buttons */
+}
+
+/* Style for the buttons */
+ul li button {
+    background-color: #ff4a40;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+ul li button:hover {
+    background-color: #e60000;
+}
+
+/* Styling for the edit button specifically */
+ul li button.edit-btn {
+    background-color: #4CAF50;  /* Green color for edit button */
+}
+
+ul li button.edit-btn:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+/* Checkbox styling */
+ul li input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.3);
+}
